@@ -1,0 +1,13 @@
+# Binary measurement and calibration data -- never diff or convert line endings.
+*.hws  binary
+*.mat  binary
+*.pdf  binary
+*.png  binary
+
+# Text
+*.m    text eol=lf
+*.py   text eol=lf
+*.tex  text eol=lf
+*.md   text eol=lf
+*.csv  text eol=lf
+*.txt  text

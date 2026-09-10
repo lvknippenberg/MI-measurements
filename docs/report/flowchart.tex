@@ -1,0 +1,94 @@
+% ----------------------------------------------------------------------
+%  Figure: the measurement on one page.
+%  Left column  = the steps, in order.
+%  Right column = the point in each step that is easiest to get wrong.
+%  Included from main.tex; needs tikz + the pstep/pwatch styles defined there.
+%  (They are NOT called step/watch: /tikz/step is a built-in TikZ key.)
+% ----------------------------------------------------------------------
+\begin{figure}[p]
+\centering
+\begin{tikzpicture}[node distance=4.5mm]
+
+% ---------------- the steps -------------------------------------------
+\node[pstep] (s1)
+  {\textbf{1 \ Prepare a dedicated sequence}\\
+   One beam type, fixed transmit voltage, transmitting continuously so the scope
+   can self-trigger. Note the element count and cycle count.};
+
+\node[pstep, below=of s1] (s2)
+  {\textbf{2 \ Set up the tank}\\
+   Water settled, tip and lens free of bubbles, absorber in the beam path for long
+   bursts. Define \texttt{Home} $=$ hydrophone tip at the centre of the probe face.};
+
+\node[pstep, below=of s2] (s3)
+  {\textbf{3 \ Choose the measuring chain}\\
+   \textbf{A} --- with pre-amplifier, scope on \SI{50}{\ohm}: sensitive, but clips
+   at $\approx$\SI{2.2}{\volt}.\\
+   \textbf{B} --- no pre-amplifier: $73\times$ less sensitive, no ceiling. Needs
+   $C_\mathrm{load}$ calibrated once against chain~A.};
+
+\node[pstep, below=of s3] (s4)
+  {\textbf{4 \ Find the field maximum}\\
+   Step along the axis; at \emph{every} station search laterally and in elevation for
+   the local maximum. Continue until the profile turns over.};
+
+\node[pstep, below=of s4] (s5)
+  {\textbf{5 \ Derate, then locate the maximum}\\
+   Apply \SI{0.3}{\decibel\per\centi\metre\per\mega\hertz} and take the maximum of
+   the \emph{derated} profile. Refine it by parabolic fit. Park the hydrophone there.};
+
+\node[pstep, below=of s5] (s6)
+  {\textbf{6 \ Sweep the transmit voltage}\\
+   At that one point. Cover the linear region on chain~A; if the sequence runs above
+   the clipping ceiling, repeat the high points on chain~B with an overlap.};
+
+\node[pstep, below=of s6] (s7)
+  {\textbf{7 \ Convert and report}\\
+   $f_\mathrm{awf}\rightarrow$ sensitivity $\rightarrow p_r$, PD, PII $\rightarrow$
+   MI, $I_\mathrm{sppa.3}$, $I_\mathrm{spta.3}$. Compare against the limit for the
+   intended application; scale to other pulse lengths and PRFs.};
+
+\foreach \i/\j in {s1/s2, s2/s3, s3/s4, s4/s5, s5/s6, s6/s7}
+  \draw[flow] (\i) -- (\j);
+
+% ---------------- what to watch, one per step -------------------------
+\node[pwatch, right=9mm of s1] (w1)
+  {A sequence that fires only on request cannot be captured by a self-triggering
+   scope. Transmit continuously.};
+
+\node[pwatch, right=9mm of s2] (w2)
+  {Every capture note must carry \texttt{Home} \emph{and} \texttt{Pos}: their
+   difference is the derating depth. \S\ref{sec:home}};
+
+\node[pwatch, right=9mm of s3] (w3)
+  {\textbf{Record the scope impedance.} \SI{1}{\mega\ohm} instead of
+   \SI{50}{\ohm} is a factor 2 on MI and 4 on the intensities, and nothing in the
+   waveform shows it. \S\ref{sec:impedance}};
+
+\node[pwatch, right=9mm of s4] (w4)
+  {Transverse step $\le\mathrm{FWHM}/10$, sized \emph{per axis}. A flat local
+   response near the peak is not evidence the step is fine enough.
+   \S\ref{sec:stepsize}};
+
+\node[pwatch, right=9mm of s5] (w5)
+  {The derated maximum sits \emph{proximal} of the in-water one, at the knee of the
+   plateau --- not where the beam is brightest. \S\ref{sec:axial}};
+
+\node[pwatch, right=9mm of s6] (w6)
+  {Inspect every waveform for a flat top. An inline attenuator does not fix
+   clipping: the clipping stage is upstream of it. \S\ref{sec:clipping}};
+
+\node[pwatch, right=9mm of s7] (w7)
+  {Take $f_\mathrm{awf}$ from a \emph{low-drive} capture, and $p_r$ from the
+   minimum, not $V_\mathrm{pp}/2$. State the application with every number.
+   \S\ref{sec:fawf}};
+
+\foreach \i in {1,...,7}
+  \draw[hint] (s\i) -- (w\i);
+
+\end{tikzpicture}
+\caption{The measurement in seven steps (blue), each with the thing most easily got wrong in it
+(orange). Steps 4 and 5 are the ones that consume the time; step 3 is the one that silently
+invalidates everything downstream if the scope impedance is not recorded.}
+\label{fig:flow}
+\end{figure}

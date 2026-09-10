@@ -1,0 +1,111 @@
+% ----------------------------------------------------------------------
+%  Symbols and abbreviations.
+%  Unnumbered (\section*) on purpose: numbering it would shift every section
+%  number in the document, and the code and READMEs cite those numbers.
+%  Included from main.tex, immediately after the table of contents.
+% ----------------------------------------------------------------------
+\section*{Symbols and abbreviations}
+\addcontentsline{toc}{section}{Symbols and abbreviations}
+
+\noindent
+The equations in \S\ref{sec:intro} and \S\ref{sec:conversion} use these throughout. A subscript
+$.3$ on any acoustic quantity means it has been \textbf{derated} by
+\SI{0.3}{\decibel\per\centi\metre\per\mega\hertz} to emulate the attenuation of intervening tissue;
+without it the quantity is the one measured in water.
+
+\newcommand{\nomrow}[2]{#1 & #2 \\}
+
+\begingroup
+\small
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.18}
+
+\begin{longtable}{@{}p{0.20\textwidth}p{0.74\textwidth}@{}}
+\endhead
+\multicolumn{2}{@{}l}{\textbf{The regulated quantities}}\\
+\midrule
+\nomrow{MI}{Mechanical index, $p_\mathrm{r.3}/\sqrt{f_\mathrm{awf}}$. A \emph{cavitation} index: the
+  potential for mechanical damage. Dimensionless.}
+\nomrow{$I_\mathrm{sppa.3}$}{Spatial-peak \emph{pulse-average} intensity, $\mathrm{PII}_{.3}/\mathrm{PD}$
+  [\si{\watt\per\square\centi\metre}]. A \emph{thermal} quantity: how hard one pulse heats.}
+\nomrow{$I_\mathrm{spta.3}$}{Spatial-peak \emph{time-average} intensity,
+  $\mathrm{PII}_{.3}\cdot\mathrm{PRF}$ [\si{\milli\watt\per\square\centi\metre}]. The long-time
+  average, so it depends on how often you transmit.}
+\nomrow{TI}{Thermal index. Not measured here; mentioned because $I_\mathrm{spta}$ does not capture
+  the temperature rise \emph{within} a burst (\S\ref{sec:scaling}).}
+\addlinespace[4pt]
+
+\multicolumn{2}{@{}l}{\textbf{What goes into them}}\\
+\midrule
+\nomrow{$p_r$}{Peak rarefactional pressure [\si{\mega\pascal}]: the most negative excursion of the
+  pressure waveform. \emph{Not} $V_\mathrm{pp}/2$ --- the waveform is asymmetric.}
+\nomrow{$p_+$}{Peak compressional pressure: the most positive excursion. Reported for context; no
+  index uses it.}
+\nomrow{$f_\mathrm{awf}$}{Acoustic working frequency [\si{\mega\hertz}]: the centre of the
+  \SI{-6}{\decibel} band of the fundamental (\S\ref{sec:fawf}). Measure it, do not assume the
+  programmed transmit frequency.}
+\nomrow{PII}{Pulse intensity integral [\si{\joule\per\square\metre}], $\int p^2/(\rho c)\,dt$ over
+  the pulse.}
+\nomrow{PD}{Pulse duration [\si{\second}], $1.25\,(t_{90}-t_{10})$.}
+\nomrow{$t_{10}$, $t_{90}$}{The instants at which the cumulative intensity integral reaches
+  \SI{10}{\percent} and \SI{90}{\percent} of its final value.}
+\nomrow{PRF}{Pulse repetition frequency [\si{\hertz}]. A property of the \emph{sequence}, not of a
+  capture. For a burst protocol use the \emph{effective} rate.}
+\nomrow{$\rho$, $c$}{Density and speed of sound of the medium; \SI{1000}{\kilo\gram\per\cubic\metre}
+  and \SI{1500}{\metre\per\second} throughout.}
+\nomrow{$z$}{Depth [\si{\centi\metre}]: distance from the transducer face to the measurement point,
+  $\lVert\mathtt{Pos}-\mathtt{Home}\rVert$ (\S\ref{sec:home}). Sets the derating.}
+\addlinespace[4pt]
+
+\multicolumn{2}{@{}l}{\textbf{The hydrophone chain} (\S\ref{sec:calibration})}\\
+\midrule
+\nomrow{$M_c(f)$}{\textbf{Open-circuit} end-of-cable hydrophone sensitivity [\si{\volt\per\pascal}]
+  --- what the Onda certificate gives. Not what the scope sees.}
+\nomrow{$M_L(f)$}{\textbf{Loaded} system sensitivity [\si{\volt\per\mega\pascal}] --- $M_c$ after the
+  capacitive divider and any gain. This is what converts volts to pressure.}
+\nomrow{$G(f)$}{Gain of the AH-2010 pre-amplifier ($\approx\SI{20}{\decibel}$), referenced to a
+  \SI{50}{\ohm} load.}
+\nomrow{$C_H$}{Hydrophone element capacitance, $\approx\SI{12.7}{\pico\farad}$.}
+\nomrow{$C_A$}{Pre-amplifier input capacitance, \SI{6.1}{\pico\farad}. Loads the hydrophone on
+  chain~A.}
+\nomrow{$C_\mathrm{load}$}{Cable $+$ scope capacitance, $\approx\SI{123}{\pico\farad}$. Loads the
+  hydrophone on chain~B, where it dominates. Not a datasheet value --- measure it
+  (\S\ref{sec:cloadcal}).}
+\nomrow{$R_L$}{Oscilloscope input impedance, \SI{50}{\ohm} or \SI{1}{\mega\ohm}
+  (\S\ref{sec:impedance}).}
+\nomrow{$R_\mathrm{out}$, $R_\mathrm{ref}$}{Pre-amplifier output impedance and the load its
+  calibration is referenced to; both \SI{50}{\ohm}.}
+\nomrow{$V_A$, $V_B$}{The same acoustic point read on chain~A and chain~B.}
+\nomrow{$V_\mathrm{pp}$}{Peak-to-peak voltage of a capture.}
+\nomrow{Chain A}{Hydrophone $\rightarrow$ pre-amplifier $\rightarrow$ scope. Sensitive; clips at
+  $\approx\SI{2.2}{\volt}$ (\S\ref{sec:clipping}).}
+\nomrow{Chain B}{Hydrophone $\rightarrow$ scope, pre-amplifier removed. $73\times$ less sensitive;
+  no ceiling (\S\ref{sec:nopreamp}).}
+\addlinespace[4pt]
+
+\multicolumn{2}{@{}l}{\textbf{Beam geometry} (\S\ref{sec:stepsize})}\\
+\midrule
+\nomrow{$\lambda$}{Acoustic wavelength at $f_\mathrm{awf}$.}
+\nomrow{$F_\#$}{f-number of the transmit beam, focal depth divided by active aperture.}
+\nomrow{FWHM}{Full width at half maximum of the beam, $\approx1.21\,\lambda F_\#$ in the focal
+  plane. The transverse search step is expressed as a fraction of it.}
+\nomrow{$\Delta$}{Transverse scan step.}
+\nomrow{\texttt{Home}, \texttt{Pos}}{Stage coordinates of the transducer face centre and of the
+  hydrophone tip, written into every capture note.}
+\addlinespace[4pt]
+
+\multicolumn{2}{@{}l}{\textbf{Abbreviations}}\\
+\midrule
+\nomrow{ARF}{Acoustic radiation force --- the long, high-amplitude push that drives a shear wave.}
+\nomrow{FDA}{US Food and Drug Administration; the source of the output limits used here.}
+\nomrow{IEC}{International Electrotechnical Commission; defines $f_\mathrm{awf}$ and the derating.}
+\nomrow{\texttt{.hws}}{Hierarchical Waveform Storage, the NI capture format. HDF5 underneath.}
+\nomrow{SFP}{Soft Front Panel, the NI application that drives the digitizer and writes
+  \texttt{.hws}.}
+\nomrow{ADC}{Analogue-to-digital converter. The PCI-5112 is \textbf{8-bit}, which is why the
+  vertical range must be set tightly.}
+\nomrow{RIS}{Random interleaved sampling: equivalent-time sampling, valid only for repetitive
+  signals and \textbf{never} for a single-shot push (\S\ref{sec:scopesettings}).}
+\bottomrule
+\end{longtable}
+\endgroup

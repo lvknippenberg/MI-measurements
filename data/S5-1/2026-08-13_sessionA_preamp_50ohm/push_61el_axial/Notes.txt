@@ -1,0 +1,11 @@
+S5-1_8V_50ohm_fund_push_61el__opt
+
+
+Probe = S5-1
+Home = (-82.21, 105.14, -42.90) mm
+Pos = (-78.51, 68, -46.6) mm
+TX_voltage = 8V
+Pulse = normal
+Scope_impedance = 50
+PushCycles = 1900
+PushElements = 61

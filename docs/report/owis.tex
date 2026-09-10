@@ -1,0 +1,120 @@
+% ----------------------------------------------------------------------
+%  Appendix: operating the OWIS motion stage.
+%  Adapted from L. van Knippenberg, "OWIS motion stage -- How to setup and
+%  use" (19 March 2024). Figures extracted from that document.
+%  NOTE: the installation password in the original is deliberately NOT
+%  reproduced here -- see the remark in the setup subsection.
+% ----------------------------------------------------------------------
+\section{Operating the OWIS motion stage}\label{app:owis}
+
+The hydrophone is carried by an OWIS three-axis motion stage (Figure~\ref{fig:owisstage}),
+driven from OWISoft on the Vantage~256 PC. Every coordinate in this report ---
+\texttt{Home}, \texttt{Pos}, the axial step, the transverse search --- is a stage coordinate, so
+this appendix records how to drive it. It is a condensed version of the standalone note
+\emph{OWIS motion stage --- how to setup and use} (19~March~2024); the OWISoft and PS-10 manuals
+are the reference for anything beyond this, and are on the group NAS alongside the installer at
+\texttt{Ultrasound-BMd\textbackslash Software\textbackslash OWIsoft}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[height=6.2cm]{owis_stage.jpeg}
+\caption{The OWIS three-axis motion stage, with the hydrophone holder mounted vertically.}
+\label{fig:owisstage}
+\end{figure}
+
+\subsection{Starting up}
+\begin{enumerate}[leftmargin=*]
+  \item On the Vantage~256 PC, start \textbf{OWISoft} (Desktop $\rightarrow$ \texttt{OWIsoft}
+    folder).
+  \item Open all three control units: \textbf{File $\rightarrow$ Control unit $\rightarrow$ Open},
+    and take \texttt{X}, \texttt{Y} and \texttt{Z} from the default folder.
+  \item \textbf{Tick \emph{active} for all three} (Figure~\ref{fig:owisfree}, left). An axis that is
+    not activated silently ignores every move command.
+\end{enumerate}
+
+\subsection{Free positioning --- moving by hand}
+The \textbf{Free positioning} tab (Figure~\ref{fig:owisfree}) is what the whole measurement of
+\S\ref{sec:protocol} is driven from. Enter a displacement per axis and press \textbf{Move relative},
+or an absolute coordinate and \textbf{Move absolute}; several axes may move at once. In the example
+shown the stage would advance \SI{5}{\milli\metre} in $x$.
+
+\good{Use \emph{Set home position} once the hydrophone tip is at the centre of the transducer face},
+and the stage will return there with \emph{Move to home position}. That point is the
+\texttt{Home} of \S\ref{sec:home}, and the derating depth of every capture is measured from it, so
+setting it deliberately at the start of a session is what makes the rest of the geometry meaningful.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{owis_freepos.jpeg}
+\caption{Free positioning. Left: the three axes, each with its \emph{active} checkbox --- all three
+must be ticked. \emph{Set home position} defines the \texttt{Home} used throughout this report.}
+\label{fig:owisfree}
+\end{figure}
+
+\subsection{Meander --- scanning a grid automatically}
+The \textbf{Meander} tab (Figure~\ref{fig:owismeander}) cycles through a rectangular grid defined by
+a step count and a step length per axis, moving in $x$ first, then $y$, then $z$. Between points it
+waits for a fixed delay, a mouse click, or the completion of a custom function.
+
+This is the mechanism the automated 3-D raster of \S\ref{sec:ideal} would be built on. What is
+missing is not the motion --- it is the synchronisation: the meander must trigger the digitizer and
+wait for a capture to be written before stepping on. The \emph{wait for function} option is the hook
+for that.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{owis_meander.jpeg}
+\caption{Meander. The grid comes from the step count and step length per axis; the dwell between
+points is a fixed delay, a button press, or a custom function --- the last being the hook a
+synchronised raster would use.}
+\label{fig:owismeander}
+\end{figure}
+
+\subsection{First-time setup}
+\emph{Reference only --- this was done on the Vantage system on 19~March~2024 and does not need
+repeating unless the PC or the controllers are replaced.}
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Install OWISoft}. The installer and the OWIS manuals are on the group NAS at
+    \texttt{Ultrasound-BMd\textbackslash Software\textbackslash OWIsoft}; they are licensed
+    software and are deliberately not in this repository. Setup asks for a user name, a company
+    and an installation password --- \caveat{the password is not reproduced here}, it is with
+    the installer on the NAS.
+  \item \textbf{Configure three control units}, one per axis: \textbf{File $\rightarrow$ Control
+    unit $\rightarrow$ New} (Figure~\ref{fig:owisconnect}), then
+    \begin{itemize}
+      \item select the COM port --- if unsure which is which, unplug the units one at a time and
+        see which port disappears;
+      \item set \textbf{Control unit type} to \texttt{PS10};
+      \item tick \emph{Initialize axes automatically} and \emph{Connect automatically at startup};
+      \item press \textbf{Connect}.
+    \end{itemize}
+  \item An axis-configuration wizard opens (Figure~\ref{fig:owisaxis}):
+    \begin{itemize}
+      \item under \textbf{Step 1}, \emph{Show dialog box}, and name the axis (axis 1 $\rightarrow$
+        \texttt{X});
+      \item \emph{Identify} finds the positioning-unit type number;
+      \item \emph{Auto-configuration}, then close;
+      \item under \textbf{Step 5}, \emph{Initialize}, then close.
+    \end{itemize}
+    Repeat for \texttt{Y} and \texttt{Z}.
+  \item \textbf{Save}: File $\rightarrow$ Control unit $\rightarrow$ Save.
+\end{enumerate}
+
+\begin{figure}[h]
+\centering
+\begin{subfigure}[t]{0.40\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{owis_connect.png}
+  \caption{Connecting a control unit.}
+  \label{fig:owisconnect}
+\end{subfigure}\hfill
+\begin{subfigure}[t]{0.56\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{owis_axis.png}
+  \caption{Configuring an axis.}
+  \label{fig:owisaxis}
+\end{subfigure}
+\caption{First-time setup of one axis. Repeat for all three.}
+\label{fig:owissetup}
+\end{figure}
