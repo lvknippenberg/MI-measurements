@@ -190,32 +190,3 @@ reason to trust the numbers.
 Against Verasonics, on the L11-5 pulse-inversion sequence, the corrected chain gives
 MI ≈ **1.23×** the console value, within the combined uncertainty of a hydrophone MI. The
 uncorrected 1 MΩ reading gave ~2× — which is how correction 1 above was found.
-
----
-
-## Open items
-
-- The **41-element row rests on session B alone.** Session A has no 41-element data, so it has
-  not been cross-validated the way 61 and 79 have. Measure it before relying on it.
-- **Confirm the ×2 impedance factor directly** with a 1 MΩ-vs-50 Ω terminator measurement on an
-  unsaturated signal. The evidence for it so far is indirect (the clip ceiling, and the agreement
-  of the two sessions).
-- **I<sub>spta.3</sub> and probe heating** need recomputing before any *continuous* high-PRF
-  transmit — for imaging or passive elastography, that budget binds long before MI does.
-- The report keeps the **ideal** measurement (a full 3-D raster with the Verasonics, stage and
-  digitizer synchronised) in §2.1 alongside the reduced axial-line measurement actually
-  performed. If that synchronisation ever gets built, §2.1 is the specification to build against.
-
----
-
-## Provenance
-
-The code and the report were developed in the
-[`SWI`](https://github.com/lvknippenberg/SWI) sequence repository (`Mechanical index/`), with the
-raw captures held outside it. This repository is the stand-alone consolidation: same code, same
-calibration, now with the data alongside it and every path resolved relative to the repository
-root. `SafetyTableAll` here reproduces the original output **bit-for-bit**.
-
-Working notes with the fuller narrative are in
-[`docs/HydrophoneSafety_Notes.md`](docs/HydrophoneSafety_Notes.md); the processing-chain
-derivation is in [`docs/UltrasoundSafetyIndices.tex`](docs/UltrasoundSafetyIndices.tex).
