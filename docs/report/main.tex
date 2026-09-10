@@ -80,9 +80,8 @@ $I_\mathrm{spta.3}$ (\S\ref{sec:conversion}), and the step-by-step measurement i
 3-D raster of the field --- and the reduced one-dimensional measurement that is actually described
 here, and what it costs. \S\ref{sec:checklist} collects the mistakes that are easy to make and
 expensive to discover late. \S\ref{sec:results} gives worked results from our own L11-5 and S5-1
-measurements as examples of what the output looks like. Appendix~\ref{app:owis} covers the
-motion stage the hydrophone is mounted on, and Appendix~\ref{app:probes} a separate comparison
-of our two S5-1 probes.
+measurements as examples of what the output looks like, and Appendix~\ref{app:owis} covers the
+motion stage the hydrophone is mounted on.
 \end{abstract}
 
 \tableofcontents
@@ -1144,10 +1143,7 @@ Aperture & $V$ at MI $=1.9$ & $V$ at $I_\mathrm{sppa.3}=190$ & $V$ at $I_\mathrm
 Everything this document refers to --- the code, the calibration, and the raw \texttt{.hws} captures
 behind every figure and every number in \S\ref{sec:results} --- is in the repository this report
 lives in. There is no external dependency and no absolute path: clone it, run \texttt{misetup}, and
-every script finds its own data. The one exception is Appendix~
-ef{app:probes}, whose two
-figures come from a separate phantom shear-wave analysis in the processing repository; they are
-included here as images only.
+every script finds its own data.
 
 \begin{center}
 \begin{tabular}{ll}
@@ -1179,75 +1175,5 @@ itself rather than producing plausible wrong numbers.
 
 \appendix
 \input{owis}
-
-% ======================================================================
-\section{Are our two S5-1 probes equivalent?}\label{app:probes}
-% ======================================================================
-\emph{This appendix does not concern the hydrophone measurement. It is included here because the
-question --- whether a safety measurement made on one of our two S5-1 probes transfers to the other
---- arises in the same conversations.}
-
-We have two S5-1 probes, the TU/e one and a second borrowed from MUMC. The suspicion worth
-eliminating was that the TU/e probe had degraded, which would both weaken our in-vivo push and
-invalidate any transfer of measurements between them.
-
-\paragraph{What was done.} On 2026-08-18 both probes swept the identical
-$3\ \text{apertures}\times2\ \text{pulse lengths}\times5\ \text{transmit voltages}$ grid on the same
-CIRS phantom, within \SI{45}{\minute} of each other, 10 pushes per cell, plus one focused B-mode of a
-resolution phantom each. Every cell was scored with the same shear-wave quality metric (mirror
-symmetry of the space--time plot). Crucially, the comparison was anchored against a
-\textbf{repeatability control}: the TU/e probe's own results from the previous day, re-coupled.
-
-\paragraph{Result.} Pooling all 30 cells:
-\begin{center}
-\begin{tabular}{lcccc}
-\toprule
-Comparison & mean & median & RMS & worst cell \\
-\midrule
-MUMC $-$ TU/e (same day, same phantom) & $-0.004$ & $-0.011$ & $0.039$ & $0.087$ \\
-TU/e 08-18 $-$ TU/e 08-17 (\emph{same} probe, re-coupled) & $+0.002$ & $+0.005$ & $0.034$ & $0.086$ \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\good{The probe-to-probe difference is the same size as the day-to-day repeatability of a single
-probe} --- i.e.\ it is measurement noise, and the two probes are indistinguishable by this test. The
-curves overlap within the inter-quartile range of the 10 pushes essentially everywhere
-(Figure~\ref{fig:probesum}), and the resolution-phantom B-modes agree as well
-(Figure~\ref{fig:probebmode}); the apparent depth difference there is a lateral placement difference
-of the wire column, not sensitivity. As a bonus, the dataset independently replicates the
-aperture/voltage ranking from the same campaign, to within $0.05$ on both probes.
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=\textwidth]{probe_compare_summary.png}
-\caption{Shear-wave quality versus transmit voltage for the TU/e and MUMC S5-1, one panel per
-aperture and pulse length, same phantom, same day. Shaded bands are the inter-quartile range over 10
-pushes.}
-\label{fig:probesum}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.84\textwidth]{probe_compare_bmode.png}
-\caption{Focused B-mode of the resolution phantom, both probes, same dynamic range. Comparable
-wire-target resolution and penetration.}
-\label{fig:probebmode}
-\end{figure}
-
-\paragraph{What this does and does not license.}
-\begin{itemize}
-  \item It \good{does} rule out the transducer as the explanation for the weak in-vivo push, which is
-    the question it was designed to answer.
-  \item It is \caveat{indirect evidence, not a calibrated equivalence}, for the safety question. The
-    metric is a shear-wave quality score on a phantom, not an acoustic-output measurement; it depends
-    on displacement, which depends on the push, but through a long chain. Two probes could differ by
-    \SIrange{10}{20}{\percent} in output and still score within this noise.
-  \item If the safety numbers of \S\ref{sec:s51} are to be applied to the MUMC probe, the honest
-    thing is a \textbf{single hydrophone capture} on that probe at the known peak location and one
-    transmit voltage, compared against the corresponding TU/e capture --- a \SI{15}{\minute}
-    measurement on an aligned setup, which converts this appendix's indirect argument into a direct
-    one.
-\end{itemize}
 
 \end{document}

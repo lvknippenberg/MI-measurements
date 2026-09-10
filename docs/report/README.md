@@ -73,11 +73,10 @@ The remaining figures are outputs of the wider analysis: `L11_5_verasonics_compa
 `PlotMI_L11_5`, and `push_axial_preamp`, `push_voltage_preamp`, `push_voltage_elements`,
 `push_intensity_elements` from `PreampComparison`.
 
-Two figures — `probe_compare_summary` and `probe_compare_bmode`, used by Appendix A — come from
-outside this repository, from the `shearWaveProcessing` probe-comparison analysis
-(`scripts/task3_probe_compare.py`). They are checked in as PNGs because the argument they support is
-about phantom shear-wave data, not about the hydrophone. Everything else in the document is
-reproducible from `data/`.
+Every figure in the document is reproducible from the captures in `data/`. (The probe-comparison
+figures that used to appear in an appendix have moved to the SWI repository, at
+`Mechanical index/hydrophone_analysis/` §7f — they are phantom shear-wave results, not hydrophone
+measurements.)
 
 `readHWS` used to emit an HDF5 warning about a 16-byte integer type on every capture. That is
 the NI 128-bit timestamp attributes, which MATLAB has no type for and which nothing here
@@ -92,6 +91,3 @@ caller's warning state. Do not suppress warnings globally to hide it -- other wa
   function, with the Verasonics, the stage and the digitizer synchronised — alongside the reduced
   axial-line measurement that is actually described. If that synchronisation ever gets built, §2.1
   is the specification to build against.
-- Appendix A argues from *phantom shear-wave* data that the two S5-1 probes are equivalent. A
-  single hydrophone capture on the MUMC probe at the known peak location would make that argument
-  direct, and is worth doing.
