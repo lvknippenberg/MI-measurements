@@ -638,8 +638,10 @@ depends only on known quantities and $C_\mathrm{load}$,
   \item \textbf{Across probes and sequences: yes.} $C_\mathrm{load}$ is a property of the hydrophone
     cable and the scope input --- the electrical side. It contains nothing about the transducer, the
     beam or the drive. Provided the same cable, adapters and scope input are used, the same
-    $C_\mathrm{load}$ applies to any probe. (Two independent determinations at different probes and
-    different frequencies agreed to $2\,\%$; see \S\ref{sec:results}.)
+    $C_\mathrm{load}$ applies to any probe. (Determined twice, at different probes and different
+    frequencies, agreeing to $2\,\%$; see \S\ref{sec:results}. Those two determinations sample
+    $C_H(f)$ at \SI{2.2}{} and \SI{5.0}{\mega\hertz}, so their agreement is a genuine check on the
+    divider terms $C_H$, $C_A$ and $G$ --- but not on $M_c$, which cancels out of the ratio.)
   \item \textbf{Across frequency: yes, within our band.} The divider
     $C_H(f)/(C_H(f)+C_\mathrm{load})$ depends on frequency only through $C_H$, which falls from
     $\approx\SI{12.7}{\pico\farad}$ to $\approx\SI{10.5}{\pico\farad}$ between \SI{1}{} and
@@ -1116,11 +1118,21 @@ Aperture & $V$ at MI $=1.9$ & $V$ at $I_\mathrm{sppa.3}=190$ & $V$ at $I_\mathrm
     voltages $I_\mathrm{spta.3}$ sits near \SI{100}{\milli\watt\per\square\centi\metre} --- under
     both the \SI{720}{} and the cardiac \SI{430}{\milli\watt\per\square\centi\metre} limit. Change
     the duty cycle and this is the first number to recompute.
-  \item \good{Extrapolation from an unsaturated region works.} An independent analysis fitting only
+  \item \good{Extrapolation from an unsaturated region works.} A separate analysis fitting only
     the low-voltage chain-A sweep and extrapolating ($\mathrm{MI}\propto V$,
     $I_\mathrm{sppa}\propto V^2$) predicted \SI{20.0}{\volt} for 79 elements and \SI{24.3}{\volt} for
     61 --- within \SI{6}{\percent} of the directly measured values. It worked here because the limits
     are crossed at \SIrange{20}{32}{\volt}, below where saturation bites.
+  \item \caveat{But the two chains are not independent, and this is not an absolute check.}
+    $C_\mathrm{load}$ was solved from the chain-A/chain-B voltage ratio (\S\ref{sec:cloadcal}), so
+    chain~B's pressure scale is derived from chain~A's calibration. An error in the preamp-chain
+    sensitivity --- above all in the hydrophone sensitivity $M_c$, the one term carrying
+    \SIrange{1}{2}{\decibel} of uncertainty --- propagates into $C_\mathrm{load}$ and then into
+    every no-preamp number, by the same factor, and cannot show up in this comparison. What the
+    agreement does establish is that the extrapolation is sound and that neither chain is distorted
+    by saturation at the crossing voltages. \good{Testing the absolute scale needs a second,
+    independently calibrated hydrophone} --- see \S\ref{sec:l115}, where the residual
+    $1.23\times$ against Verasonics is exactly the kind of error this comparison is blind to.
   \item \caveat{The table is deliberately pessimistic.} It is built from the peak-optimised single
     captures at each voltage, which read higher than repeated captures at the same nominal position
     (\SI{102}{\milli\volt} versus \SI{66}{\milli\volt} at \SI{40}{\volt}, 79 elements). That is the
