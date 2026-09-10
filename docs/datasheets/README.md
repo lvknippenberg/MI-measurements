@@ -43,9 +43,12 @@ What *is* here is our own reading of them: the thirteen MI values that `RunDemo`
 validate against are tabulated in the code, as measurements taken from the console for the L11-5v
 `WideBeamHISC` sequence. That is data we recorded, not their document.
 
-## Also not included
+## Digitizer
 
-The **NI PCI-5112** manual and the Scope Soft Front Panel documentation are not bundled — they
-come with the NI-SCOPE driver installation. What matters for the analysis is captured in
-`../HydrophoneSafety_Notes.md` and in `readHWS`: 8-bit, 100 MS/s real-time, software-selectable
-50 Ω / 1 MΩ input, and `.hws` files that are HDF5 with samples stored as raw ADC codes.
+| File | Why you would open it |
+|---|---|
+| `NI PCI-5112 specs.pdf` | the digitizer: **8-bit**, 100 MS/s real-time, software-selectable 50 Ω / 1 MΩ input. Three properties drive the protocol — 8 bits is why the vertical range must be set tightly, 100 MS/s is the ceiling above which the card switches to RIS (invalid for a single-shot push), and the switchable impedance is what makes the 50 Ω / 1 MΩ check a keystroke rather than a cable change. |
+
+The Scope Soft Front Panel documentation is not bundled; it comes with the NI-SCOPE driver
+installation. What matters for the analysis is in `readHWS`: `.hws` is HDF5, and samples are stored
+as raw ADC codes that must be scaled by the polynomial in the file.
