@@ -209,8 +209,6 @@ two instruments.
 | Verasonics `MIData_<probe>` tables | licensed Vantage documentation, and already on any Vantage: `Example_Scripts\Biomedical\Vantage 128 and 256\UTA-260-S and 260-D\<probe>\High Image Quality\` |
 | The transmit sequences (S5-1, L11-5v, L12-3v) | all three are Verasonics code or reductions of their example scripts; the originals are in the same `Example_Scripts` folders. `code/README.md` says what each was reduced from |
 | OWISoft installer and OWIS manuals | licensed software, on the group NAS at `Ultrasound-BMd\Software\OWIsoft` |
-| The OWISoft installation password | with the installer on the NAS — **never commit it**, private or not |
-| NI PCI-5112 / Scope SFP manuals | ship with the NI-SCOPE driver |
 
 Numbers we measured *from* those systems — the thirteen Verasonics MI values the validation compares
 against, for instance — are our own observations and are in the code.
