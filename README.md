@@ -53,7 +53,7 @@ What the five parts of the demonstration do:
 misetup.m              put the repository on the MATLAB path
 code/                  the measurement chain, stand-alone
   analysis/            the full analyses behind the report's figures and tables
-  acquisition/         scan planning and the Verasonics safety-evaluation sequences
+  acquisition/         scan and measurement planning for the water-tank session
   legacy/              the pre-2026-08 code, kept for provenance -- do not use
 calibration/           the Onda certificates and the digested tables
 data/                  real example captures (193 .hws files, ~35 MB)
@@ -207,7 +207,7 @@ two instruments.
 | What | Where it is instead |
 |---|---|
 | Verasonics `MIData_<probe>` tables | licensed Vantage documentation, and already on any Vantage: `Example_Scripts\Biomedical\Vantage 128 and 256\UTA-260-S and 260-D\<probe>\High Image Quality\` |
-| The L11-5v / L12-3v safety sequences | modified Verasonics example scripts, carrying their notice — the originals are in the same `Example_Scripts` folders. `Setup_SWI_safety_evaluation.m`, which produced the S5-1 data here, is our own code and is included |
+| The transmit sequences (S5-1, L11-5v, L12-3v) | all three are Verasonics code or reductions of their example scripts; the originals are in the same `Example_Scripts` folders. `code/README.md` says what each was reduced from |
 | OWISoft installer and OWIS manuals | licensed software, on the group NAS at `Ultrasound-BMd\Software\OWIsoft` |
 | The OWISoft installation password | with the installer on the NAS — **never commit it**, private or not |
 | NI PCI-5112 / Scope SFP manuals | ship with the NI-SCOPE driver |

@@ -51,12 +51,20 @@ the note field — that note is what `DepthFromNotes` later reads.
 |---|---|
 | `scanPlan.m` | a non-uniform 3-line scan sized to the beam (λ, lateral FWHM, depth of focus), with per-point trigger delays. |
 | `measurementPlan.m` | the per-beam-type protocol: coarse search → recentre on the observed peak → fine scan → 1-D voltage and pulse-length sweeps at that peak. |
-| `Setup_SWI_safety_evaluation.m` | **the sequence that produced the S5-1 data in `data/`** — `SetUp_SWI_Widebeam` reduced to non-steered beams, one transmit event repeated. |
 
-The L11-5v and L12-3v safety sequences used alongside it are modified **Verasonics example scripts** and carry their notice, so they are not redistributed here; they are derived from `SetUpL11_5vWideBeamHISC.m` and `SetUpL12_3vWideBeamSC.m` under
-`Example_Scripts\Biomedical\Vantage 128 and 256\UTA-260-S and 260-D\<probe>\`, with steering
-removed and a single transmit event repeated — the same reduction as
-`Setup_SWI_safety_evaluation.m`, which is our own code and is included.
+No transmit sequences are included: they are Verasonics code, or derived from it, and cannot be
+redistributed. All three were the same reduction of a stock example — steering removed, a single
+transmit event repeated continuously so the scope can self-trigger (\S"Step 1" of the report):
+
+| Sequence | Derived from |
+|---|---|
+| S5-1 shear-wave push and imaging (produced everything in `data/S5-1/`) | our `SetUp_SWI_Widebeam` |
+| L11-5v pulse inversion (produced `data/L11-5/`) | `SetUpL11_5vWideBeamHISC.m` |
+| L12-3v | `SetUpL12_3vWideBeamSC.m` |
+
+The Verasonics originals are under
+`Example_Scripts\Biomedical\Vantage 128 and 256\UTA-260-S and 260-D\<probe>\` in the Vantage
+installation.
 
 ## `legacy/`
 
