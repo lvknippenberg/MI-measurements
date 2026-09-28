@@ -301,5 +301,5 @@ LaTeX item still open: hydrophone **phase** calibration (see caveat).
   `docs\phantom_voltage_sweep.md`. Data: `...\2026_08_17 Phantom sweep elements cycles TXvoltage\`.
   **Long-path gotcha:** the OneDrive folder prefix + `AcquisitionParametersAndECG.mat` exceeds
   Windows MAX_PATH (260) so the Python (Win32) pipeline can't `stat` the `.mat` (Git Bash can, via
-  POSIX). Work through a short **junction** (`mklink /J D:\swp_ph "<sweep folder>"`).
+  POSIX). Work through a short **junction** (`mklink /J D:\Luuk van Knippenberg\Claude\links\swp_ph "<sweep folder>"`).
 - MATLAB: R2025b (`-batch`); note script names cannot start with `_` (invalid identifier).
